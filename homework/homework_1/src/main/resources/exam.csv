@@ -1,6 +1,6 @@
 QUESTION,ANSWERA,ANSWERB,ANSWERC,ANSWERD,RIGHTANSWER
-Q1,a,b,c,d,a
-Q2,a,b,c,d,a
-Q3,a,b,c,d,a
-Q4,a,b,c,d,a
-Q5,a,b,c,d,a
+Do you like java?,YES,SURE,DA,OTUS,d
+What colour of courses logo?,GREEN,SOFT GREEN,DARK GREEN,OTUS,a
+Do you remember that New Year is coming soon?,YES,SURE,OTUS,NO,c
+4 is OK for you or you need 5?,IS NOT!,5 ONLY!,5 OR DIE!,OTUS,d
+Java/Hibernate/Spring/... What the next?,OTUS,OTUS,OTUS,OTUS,b

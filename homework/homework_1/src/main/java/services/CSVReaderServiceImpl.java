@@ -14,7 +14,6 @@ import java.util.List;
 public class CSVReaderServiceImpl implements CSVReaderService {
     private CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader();
     private Reader input = null;
-    private String question = "%s\n\na) %s;\nb)%s;\nc)%s;\nd)$s;";
     private CSVParser csvFileParser = null;
     private List<CSVRecord> csvRecords = null;
     private int recordsAmount;
@@ -34,7 +33,7 @@ public class CSVReaderServiceImpl implements CSVReaderService {
     }
 
     public String readQuestion(int num){
-        return String.format(question, csvRecords.get(num).get("QUESTION").toString(),
+        return String.format(Constants.QUESTION_TEMPLATE, csvRecords.get(num).get("QUESTION").toString(),
                 csvRecords.get(num).get("ANSWERA").toString(),
                 csvRecords.get(num).get("ANSWERB").toString(),
                 csvRecords.get(num).get("ANSWERC").toString(),

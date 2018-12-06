@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Exam {
     private CSVReaderServiceImpl csvReaderImpl = null;
-    private StringBuffer result = new StringBuffer("%s %s's result: %s/%s ( ");
+    private StringBuffer result = new StringBuffer(Constants.RESULT_TEMPLATE);
     int correctCounter;
 
     public Exam(CSVReaderServiceImpl csvReaderService) throws IOException {
@@ -28,7 +28,7 @@ public class Exam {
     }
 
     public void getResult(String name, String last_name, int questionCount){
-        result.append(" )");
+        result.append(")");
         result.toString();
         System.out.println(String.format(result.toString(), name, last_name, correctCounter, questionCount));
     }
