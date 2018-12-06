@@ -11,8 +11,9 @@ public class ExamServiceImpl implements ExamService {
     private Exam ex;
     private String answer;
 
-    public ExamServiceImpl(CSVReaderService csvReaderService){
+    public ExamServiceImpl(CSVReaderService csvReaderService, Exam exam){
         this.csvReaderService = csvReaderService;
+        this.ex = exam;
     }
 
     @Override
@@ -23,7 +24,6 @@ public class ExamServiceImpl implements ExamService {
             String last_name = sc.nextLine();
 
             for (int i = 0; i < csvReaderService.getRecordsAmount(); i++){
-                    csvReaderService.readQuestion(i);
                 ex.takeQuestion(i);
                 answer = sc.nextLine();
                 ex.setAnswer(answer, i);

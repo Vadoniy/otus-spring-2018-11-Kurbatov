@@ -28,7 +28,8 @@ public class Exam {
     }
 
     public void getResult(String name, String last_name, int questionCount){
+        result.append(" )");
         result.toString();
-        String.format(result.toString(), name, last_name, correctCounter, questionCount);
+        System.out.println(String.format(result.toString(), name, last_name, correctCounter, questionCount));
     }
 }

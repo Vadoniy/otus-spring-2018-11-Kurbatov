@@ -6,11 +6,12 @@
 
     <bean id="csvReaderService" class="services.CSVReaderServiceImpl"/>
 
-    <bean id="examService" class="services.ExamServiceImpl">
+    <bean id="exam" class="domain.Exam">
         <constructor-arg ref="csvReaderService"/>
     </bean>
 
-    <bean id="exam" class="domain.Exam">
+    <bean id="examService" class="services.ExamServiceImpl">
         <constructor-arg ref="csvReaderService"/>
+        <constructor-arg ref="exam"/>
     </bean>
 </beans>
