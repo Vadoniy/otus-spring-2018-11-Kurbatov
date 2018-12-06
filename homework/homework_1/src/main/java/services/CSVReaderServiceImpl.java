@@ -25,13 +25,6 @@ public class CSVReaderServiceImpl implements CSVReaderService {
         recordsAmount = csvRecords.size();
     }
 
-    public void init() throws IOException {
-        input = new FileReader(Constants.FILE_PATH);
-        csvFileParser = new CSVParser(input, csvFileFormat);
-        csvRecords = csvFileParser.getRecords();
-        recordsAmount = csvRecords.size();
-    }
-
     public String readQuestion(int num){
         return String.format(Constants.QUESTION_TEMPLATE, csvRecords.get(num).get("QUESTION").toString(),
                 csvRecords.get(num).get("ANSWERA").toString(),
