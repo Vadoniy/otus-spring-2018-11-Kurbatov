@@ -1,23 +1,30 @@
 package homework_2.homework.otus_spring_2018_11_Kurbatov.OTUS.services.impl;
 
-import homework_2.homework.otus_spring_2018_11_Kurbatov.OTUS.utils.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class CSVReaderServiceImplTest {
 
+    private Properties properties = new Properties();
     private CSVReaderServiceImpl impl;
     private String testQuestion;
     private String testCorrectAnswer;
     private int recordsAmount;
 
+
     @Before
     public void setUp() throws IOException {
-        impl = new CSVReaderServiceImpl(Constants.FILE_TEST_PATH);
+        properties = new Properties();
+        properties.load(new FileInputStream(ClassLoader.getSystemClassLoader().getResource(
+                "application.properties").getPath()));
+        impl = new CSVReaderServiceImpl(properties.getProperty("file.name"));
         testQuestion = "Do you like java?";
         testCorrectAnswer = "d";
         recordsAmount = 5;

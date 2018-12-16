@@ -5,6 +5,8 @@ import homework_2.homework.otus_spring_2018_11_Kurbatov.OTUS.utils.Constants;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
@@ -12,7 +14,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
-@Service
+@Service("csvReaderService")
 public class CSVReaderServiceImpl implements CSVReaderService {
     private CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader();
     private Reader input = null;
@@ -20,16 +22,21 @@ public class CSVReaderServiceImpl implements CSVReaderService {
     private List<CSVRecord> csvRecords = null;
     private int recordsAmount;
 
-    public CSVReaderServiceImpl() throws IOException {
-        input = new FileReader(Constants.FILE_PATH);
+    public CSVReaderServiceImpl() {
+    }
+
+    @Autowired
+    public CSVReaderServiceImpl(@Value("${file.name}") String fileName, @Value("${locale.set}") String localeSet) throws IOException {
+        input = new FileReader(ClassLoader.getSystemClassLoader().getResource(
+                String.format(Constants.FILE_NAME_TEMPLATE, fileName, localeSet)).getPath());
         csvFileParser = new CSVParser(input, csvFileFormat);
         csvRecords = csvFileParser.getRecords();
         recordsAmount = csvRecords.size();
     }
 
     //For tests
-    public CSVReaderServiceImpl(String testPath) throws IOException {
-        input = new FileReader(testPath);
+    public CSVReaderServiceImpl(String fileName) throws IOException {
+        input = new FileReader(fileName);
         csvFileParser = new CSVParser(input, csvFileFormat);
         csvRecords = csvFileParser.getRecords();
         recordsAmount = csvRecords.size();

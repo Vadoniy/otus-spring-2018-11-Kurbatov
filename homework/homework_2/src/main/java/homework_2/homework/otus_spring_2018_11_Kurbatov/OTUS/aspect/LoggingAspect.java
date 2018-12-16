@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    @Before("execution(* homework_2.homework.otus_spring_2018_11_Kurbatov.OTUS.services.impl.CSVReaderServiceImpl.*(..))")
+    @Before("execution(* homework_2.homework.otus_spring_2018_11_Kurbatov.OTUS.services.CSVReaderService.*(..))")
     public void logBefore(JoinPoint joinPoint){
         System.out.println("Method call : " + joinPoint.getSignature().getName());
     }
