@@ -9,7 +9,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 @Configuration
 @ComponentScan
 @PropertySource("classpath:application.properties")

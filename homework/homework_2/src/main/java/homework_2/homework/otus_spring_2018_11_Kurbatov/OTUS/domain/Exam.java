@@ -21,7 +21,7 @@ public class Exam {
     public Exam(){}
 
     @Autowired
-    public Exam(CSVReaderServiceImpl csvReaderService, MessageSource ms, @Value("${locale.set}") String locale) throws IOException {
+    public Exam(CSVReaderService csvReaderService, MessageSource ms, @Value("${locale.set}") String locale) throws IOException {
         this.csvReaderService = csvReaderService;
         this.locale = Locale.forLanguageTag(locale);
         result = new StringBuffer(ms.getMessage("result", null, this.locale));
