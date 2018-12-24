@@ -1,0 +1,5 @@
+exam:
+  fileName: exam_
+  baseName: /i18n/bundle
+  localeSet: ru-RU
+  encodingSet: UTF-8
