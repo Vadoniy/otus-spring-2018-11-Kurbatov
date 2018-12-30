@@ -5,6 +5,15 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+    }
+}
+
 subprojects{
     apply plugin: 'java'
 
@@ -37,11 +46,15 @@ project('homework_2'){
     }*/
 }
 
+
 project('homework_3'){
+
+    apply plugin: 'org.springframework.boot'
+
     dependencies{
-        compile group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '2.1.1.RELEASE'
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.1.RELEASE'
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.1.RELEASE', ext: 'pom'
 
         testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.1.RELEASE'
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'

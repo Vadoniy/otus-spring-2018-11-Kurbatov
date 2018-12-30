@@ -1,6 +1,6 @@
 package homework_3.homework.otus_spring_2018_11_Kurbatov.OTUS.services.impl;
 
-import homework_3.homework.otus_spring_2018_11_Kurbatov.OTUS.configs.YamlProperies;
+import homework_3.homework.otus_spring_2018_11_Kurbatov.OTUS.configs.YamlProperties;
 import homework_3.homework.otus_spring_2018_11_Kurbatov.OTUS.services.CSVReaderService;
 import homework_3.homework.otus_spring_2018_11_Kurbatov.OTUS.utils.Constants;
 import org.apache.commons.csv.CSVFormat;
@@ -26,7 +26,7 @@ public class CSVReaderServiceImpl implements CSVReaderService {
     }
 
     @Autowired
-    public CSVReaderServiceImpl(YamlProperies yml) throws IOException {
+    public CSVReaderServiceImpl(YamlProperties yml) throws IOException {
         input = new FileReader(ClassLoader.getSystemClassLoader().getResource(
                 String.format(Constants.FILE_NAME_TEMPLATE, yml.getFileName(), yml.getLocaleSet())).getPath());
         csvFileParser = new CSVParser(input, csvFileFormat);

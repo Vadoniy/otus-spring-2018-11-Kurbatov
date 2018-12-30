@@ -3,7 +3,7 @@ package homework_3.homework.otus_spring_2018_11_Kurbatov.OTUS.configs;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "exam")
-public class YamlProperies {
+public class YamlProperties {
 
     private String fileName;
     private String baseName;
