@@ -60,3 +60,18 @@ project('homework_3'){
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
     }
 }
+
+project('homework_4'){
+
+    apply plugin: 'org.springframework.boot'
+
+    dependencies{
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.1.RELEASE', ext: 'pom'
+        compile group: 'org.springframework.shell', name: 'spring-shell-starter', version: '2.0.1.RELEASE'
+
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.1.RELEASE'
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
+    }
+}

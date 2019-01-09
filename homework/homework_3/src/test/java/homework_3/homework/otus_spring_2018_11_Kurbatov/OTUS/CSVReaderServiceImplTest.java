@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotEquals;
 
 public class CSVReaderServiceImplTest {
 
-    private Properties properties = new Properties();
+    private Properties properties;
     private CSVReaderServiceImpl impl;
     private String testQuestion;
     private String testCorrectAnswer;
