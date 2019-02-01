@@ -29,6 +29,9 @@ subprojects{
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
         compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.2'
         compile group: 'aspectj', name: 'aspectjrt', version: '1.5.4'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.2.RELEASE'
+        
+        compile("org.springframework.boot:spring-boot-starter")
 
         testCompile group: 'junit', name: 'junit', version: '4.12'
         testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.2'
@@ -84,11 +87,10 @@ project('homework_5'){
 
     dependencies{
         
-        compile("org.springframework.boot:spring-boot-starter")
         compile("org.springframework.boot:spring-boot-starter-jdbc")
         compile("org.springframework:spring-jdbc")
-        compile("com.h2database:h2")
         compile("org.springframework.boot:spring-boot-starter-web")
+        compile("com.h2database:h2")
 
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.1.2.RELEASE'
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.1.RELEASE'
@@ -98,6 +100,32 @@ project('homework_5'){
         compile group: 'com.h2database', name: 'h2', version: '1.4.197'
         compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.2.RELEASE'
         
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.1.RELEASE'
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
+    }
+}
+
+project('homework_6'){
+
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies{
+
+        compile("org.springframework.boot:spring-boot-starter")
+        compile("org.springframework.boot:spring-boot-starter-jdbc")
+        compile("org.springframework:spring-jdbc")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("com.h2database:h2")
+
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.1.2.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.1.RELEASE', ext: 'pom'
+        compile group: 'org.springframework.shell', name: 'spring-shell-starter', version: '2.0.1.RELEASE'
+
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
         testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.1.RELEASE'
