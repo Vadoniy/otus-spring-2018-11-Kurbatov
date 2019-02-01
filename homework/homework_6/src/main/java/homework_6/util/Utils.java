@@ -1,13 +1,18 @@
 package homework_6.util;
 
+import homework_6.domain.Book;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Utils {
 
-    public static String listToString(List list){
+    public static String booksTitlesListToString(List<Book> list){
         StringBuilder srt = new StringBuilder();
-        for (Object o : list){
-            srt.append(o.toString());
+        for (Book b : list){
+            srt.append(b.getTitle());
+            srt.append("; ");
         }
         return srt.toString();
     }

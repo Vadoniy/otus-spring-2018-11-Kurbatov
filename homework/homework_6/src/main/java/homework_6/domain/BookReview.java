@@ -59,7 +59,9 @@ public class BookReview {
     @Override
     public String toString() {
         return "BookReview{" +
-                "review='" + review + '\'' +
+                "reviewId=" + reviewId +
+                ", book=" + book.getTitle() +
+                ", review='" + review + '\'' +
                 ", reviewOwner='" + reviewOwner + '\'' +
                 '}';
     }

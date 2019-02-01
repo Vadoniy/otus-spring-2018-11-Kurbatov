@@ -2,6 +2,7 @@ package homework_6.dao.impl;
 
 import homework_6.dao.AuthorRepositoryJpa;
 import homework_6.domain.Author;
+import homework_6.domain.Book;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +40,7 @@ public class AuthorRepositoryJpaImpl implements AuthorRepositoryJpa {
     @Override
     @Transactional
     public void deleteById(long authorId) {
-
+        em.remove(em.find(Author.class, authorId));
     }
 
     @Override

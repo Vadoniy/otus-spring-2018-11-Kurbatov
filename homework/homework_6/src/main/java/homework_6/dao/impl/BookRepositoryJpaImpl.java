@@ -37,7 +37,7 @@ public class BookRepositoryJpaImpl implements BookRepositoryJpa {
     @Override
     @Transactional
     public void deleteById(long bookId) {
-
+        em.remove(em.find(Book.class, bookId));
     }
 
     @Override

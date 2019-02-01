@@ -14,7 +14,7 @@ public class Genre {
     private long genreId;
     @Column
     private String genre;
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "genre")
     private List<Book> books;
 
     public Genre(){}
@@ -44,14 +44,14 @@ public class Genre {
     }
 
     public void setBooks(List<Book> books) {
-        books.forEach(book -> this.books.add(book));
+        this.books = books;
     }
 
     @Override
     public String toString() {
         return "Genre{" +
                 "genre='" + genre + '\'' +
-                ", books=" + Utils.listToString(books) +
+                ", books=" + Utils.booksTitlesListToString(books) +
                 '}';
     }
 }

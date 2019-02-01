@@ -44,8 +44,18 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
     }
 
     @Override
-    public void addBook(String title, Author author, List<Genre> genres) {
-        bookRepositoryJpa.addBook(new Book(title, authorRepositoryJpa.getByName(author.getPenName()), genres));
+    public void addBook(String title, String author, String genre) {
+        Author author1 = authorRepositoryJpa.getByName(author);
+        if (author1 == null) {
+            System.err.println("Unknown author.");
+            return;
+        }
+        Genre genre1 = genreRepositoryJpa.getByName(genre);
+        if (author1 == null) {
+            System.err.println("Unknown genre.");
+            return;
+        }
+        bookRepositoryJpa.addBook(new Book(title, author1, genre1));
     }
 
     @Override
@@ -54,8 +64,52 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
     }
 
     @Override
-    public String getAuthor(String penName) {
+    public void updateBook(long bookId, String title, String author, String genre) {
+        Book cacheBook = bookRepositoryJpa.getById(bookId);
+        if (cacheBook == null){
+            System.err.println("Unknown book.");
+            return;
+        }
+        Author author1 = authorRepositoryJpa.getByName(author);
+        if (author1 == null) {
+            System.err.println("Unknown author.");
+            return;
+        }
+        Genre genre1 = genreRepositoryJpa.getByName(genre);
+        if (author1 == null) {
+            System.err.println("Unknown genre.");
+            return;
+        }
+
+        cacheBook.setTitle(title);
+        cacheBook.setAuthor(author1);
+        cacheBook.setGenre(genre1);
+
+        bookRepositoryJpa.updateBook(cacheBook);
+    }
+
+    @Override
+    public void updateReview(long reviewId, String reviewOwner, String review) {
+        BookReview cacheReview = reviewRepositoryJpa.getById(reviewId);
+        if (cacheReview == null){
+            System.err.println("There's no review with id " + reviewId);
+            return;
+        }
+
+        cacheReview.setReviewOwner(reviewOwner);
+        cacheReview.setReview(review);
+
+        reviewRepositoryJpa.updateBookReview(cacheReview);
+    }
+
+    @Override
+    public String getAuthorByName(String penName) {
         return authorRepositoryJpa.getByName(penName).toString();
+    }
+
+    @Override
+    public String getAuthorById(long authorId) {
+        return authorRepositoryJpa.getById(authorId).toString();
     }
 
     @Override
@@ -64,23 +118,53 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
     }
 
     @Override
-    public String getBook(String title) {
+    public String getGenreById(long genreId) {
+        return genreRepositoryJpa.getById(genreId).toString();
+    }
+
+    @Override
+    public String getBookByName(String title) {
         return bookRepositoryJpa.getByName(title).toString();
     }
 
     @Override
-    public String getReview(String bookTitle) {
+    public String getBookById(long bookId) {
+        return bookRepositoryJpa.getById(bookId).toString();
+    }
+
+    @Override
+    public String getReviewByBookTitle(String bookTitle) {
         return reviewRepositoryJpa.getByBook(bookRepositoryJpa.getByName(bookTitle)).toString();
+    }
+
+    @Override
+    public String getReviewById(long reviewId) {
+        return reviewRepositoryJpa.getById(reviewId).toString();
+    }
+
+    @Override
+    public String getReviewByBookId(long bookId) {
+        return reviewRepositoryJpa.getByBook(bookRepositoryJpa.getById(bookId)).toString();
     }
 
 
     @Override
     public void deleteAuthor(long id) {
-
+        authorRepositoryJpa.deleteById(id);
     }
 
     @Override
     public void deleteGenre(long id) {
+        genreRepositoryJpa.deleteById(id);
+    }
+
+    @Override
+    public void deleteBook(long id) {
+        bookRepositoryJpa.deleteById(id);
+    }
+
+    @Override
+    public void deleteReview(long id) {
 
     }
 
@@ -95,13 +179,16 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
     }
 
     @Override
-    public List<BookReview> getReviewsList() {
-        return null;
+    public List<String> getReviewsList() {
+        List<String> reviews = new ArrayList<>();
+        for (BookReview r : reviewRepositoryJpa.getAll()){
+            reviews.add(r.toString());
+        }
+        return reviews;
     }
 
     @Override
     public List<String> getAuthorsList() {
-        authorRepositoryJpa.getAll();
         List<String> authors = new ArrayList<>();
         for (Author a : authorRepositoryJpa.getAll()){
             authors.add(a.toString());
@@ -111,7 +198,6 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
 
     @Override
     public List<String> getGenresList() {
-        genreRepositoryJpa.getAll();
         List<String> genres = new ArrayList<>();
         for (Genre g : genreRepositoryJpa.getAll()){
             genres.add(g.toString());

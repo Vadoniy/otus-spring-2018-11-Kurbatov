@@ -51,7 +51,7 @@ public class Author {
     public String toString() {
         return "Author{" +
                 "penName='" + penName + '\'' +
-                ", books=" + Utils.listToString(books) +
+                ", books=" + Utils.booksTitlesListToString(books) +
                 '}';
     }
 }

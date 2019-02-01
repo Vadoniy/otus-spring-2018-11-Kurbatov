@@ -31,7 +31,7 @@ public class BookReviewRepositoryJpaImpl implements BookReviewRepositoryJpa {
 
     @Override
     public List<BookReview> getAll() {
-        TypedQuery<BookReview> query = em.createQuery("select r from BookReview", BookReview.class);
+        TypedQuery<BookReview> query = em.createQuery("select r from BookReview r", BookReview.class);
         return query.getResultList();
     }
 
@@ -43,7 +43,8 @@ public class BookReviewRepositoryJpaImpl implements BookReviewRepositoryJpa {
 
     @Override
     @Transactional
-    public void deleteReview(BookReview review) {
+    public void deleteById(long bookReviewId) {
+        em.remove(em.find(BookReview.class, bookReviewId));
     }
 
     @Override

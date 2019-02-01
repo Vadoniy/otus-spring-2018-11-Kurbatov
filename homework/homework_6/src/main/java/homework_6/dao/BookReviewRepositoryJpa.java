@@ -10,7 +10,6 @@ public interface BookReviewRepositoryJpa {
     BookReview getByBook(Book book);
     List<BookReview> getAll();
     void addReview(BookReview newBookReview);
-//    void deleteById(long bookReviewId);
-    void deleteReview(BookReview review);
+    void deleteById(long bookReviewId);
     void updateBookReview(BookReview bookReview);
 }

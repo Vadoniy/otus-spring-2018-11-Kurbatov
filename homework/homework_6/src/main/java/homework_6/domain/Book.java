@@ -1,10 +1,6 @@
 package homework_6.domain;
 
-import homework_6.util.Utils;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "BOOKS")
@@ -17,17 +13,16 @@ public class Book {
     private String title;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Author author;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    private List<Genre> genres;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Genre genre;
 
     public Book() {
     }
 
-    public Book(String title, Author author, List<Genre> genres /*Genre genre*/){
+    public Book(String title, Author author, Genre genre){
         this.title = title;
         this.author = author;
-        this.genres = new ArrayList<>();
-        genres.forEach(genre1 -> this.genres.add(genre1));
+        this.genre = genre;
     }
 
     public long getBookId() {
@@ -54,12 +49,12 @@ public class Book {
         this.author = author;
     }
 
-    public void setGenres(List<Genre> genres) {
-        genres.forEach(genre1 -> this.genres.add(genre1));
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void removeGenre(List<Genre> genres) {
-        genres.forEach(genre1 -> this.genres.remove(genre1));
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override
@@ -67,8 +62,8 @@ public class Book {
         return "Book{" +
                 "bookId=" + bookId +
                 ", title='" + title + '\'' +
-                ", author=" + author +
-                ", genres=" + Utils.listToString(genres) +
+                ", author=" + author.getPenName() +
+                ", genre=" + genre.getGenre() +
                 '}';
     }
 }

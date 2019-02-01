@@ -23,7 +23,7 @@ public class GenreRepositoryJpaImpl implements GenreRepositoryJpa {
 
     @Override
     public Genre getByName(String genre) {
-        TypedQuery<Genre> query = em.createQuery("select g from Genre g where g.genre := genre", Genre.class);
+        TypedQuery<Genre> query = em.createQuery("select g from Genre g where g.genre = :genre", Genre.class);
         query.setParameter("genre", genre);
         return query.getSingleResult();
     }
