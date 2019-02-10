@@ -1,7 +1,6 @@
 package homework_6.dao;
 
 import homework_6.domain.Author;
-import homework_6.domain.BookReview;
 
 import java.util.List;
 

@@ -51,7 +51,7 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
             return;
         }
         Genre genre1 = genreRepositoryJpa.getByName(genre);
-        if (author1 == null) {
+        if (genre1 == null) {
             System.err.println("Unknown genre.");
             return;
         }
@@ -76,7 +76,7 @@ public class LibraryServiceShellImpl implements LibraryServiceShell {
             return;
         }
         Genre genre1 = genreRepositoryJpa.getByName(genre);
-        if (author1 == null) {
+        if (genre1 == null) {
             System.err.println("Unknown genre.");
             return;
         }

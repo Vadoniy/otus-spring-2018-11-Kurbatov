@@ -1,7 +1,0 @@
-rootProject.name = 'homework'
-include 'homework_1'
-include 'homework_2'
-include 'homework_3'
-include 'homework_4'
-include 'homework_5'
-include 'homework_6'

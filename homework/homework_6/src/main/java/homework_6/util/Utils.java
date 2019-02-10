@@ -2,8 +2,6 @@ package homework_6.util;
 
 import homework_6.domain.Book;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Utils {

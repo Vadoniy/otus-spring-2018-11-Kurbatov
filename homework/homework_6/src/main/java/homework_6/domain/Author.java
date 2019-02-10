@@ -1,9 +1,6 @@
 package homework_6.domain;
 
-import homework_6.util.Utils;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "AUTHORS")
@@ -14,8 +11,8 @@ public class Author {
     private long authorId;
     @Column
     private String penName;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
-    private List<Book> books;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+//    private List<Book> books;
 
     public Author(){}
 
@@ -39,19 +36,19 @@ public class Author {
         this.penName = penName;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
+//    public List<Book> getBooks() {
+//        return books;
+//    }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
+//    public void setBooks(List<Book> books) {
+//        this.books = books;
+//    }
 
     @Override
     public String toString() {
         return "Author{" +
                 "penName='" + penName + '\'' +
-                ", books=" + Utils.booksTitlesListToString(books) +
+//                ", books=" + Utils.booksTitlesListToString(books) +
                 '}';
     }
 }
