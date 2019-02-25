@@ -1,9 +1,6 @@
 package homework_6.domain;
 
-import homework_6.util.Utils;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "GENRES")
@@ -14,8 +11,8 @@ public class Genre {
     private long genreId;
     @Column
     private String genre;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "genre")
-    private List<Book> books;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "genre")
+//    private List<Book> books;
 
     public Genre(){}
 
@@ -39,19 +36,19 @@ public class Genre {
         this.genre = genre;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
+//    public List<Book> getBooks() {
+//        return books;
+//    }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
+//    public void setBooks(List<Book> books) {
+//        this.books = books;
+//    }
 
     @Override
     public String toString() {
         return "Genre{" +
                 "genre='" + genre + '\'' +
-                ", books=" + Utils.booksTitlesListToString(books) +
+//                ", books=" + Utils.booksTitlesListToString(books) +
                 '}';
     }
 }
