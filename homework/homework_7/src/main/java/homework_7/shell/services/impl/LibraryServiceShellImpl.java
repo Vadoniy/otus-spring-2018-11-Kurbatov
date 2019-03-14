@@ -1,9 +1,9 @@
 package homework_7.shell.services.impl;
 
-import homework_7.dao.AuthorRepository;
-import homework_7.dao.BookRepository;
-import homework_7.dao.GenreRepository;
-import homework_7.dao.ReviewRepository;
+import homework_7.repository.AuthorRepository;
+import homework_7.repository.BookRepository;
+import homework_7.repository.GenreRepository;
+import homework_7.repository.ReviewRepository;
 import homework_7.domain.Author;
 import homework_7.domain.Book;
 import homework_7.domain.BookReview;
@@ -14,7 +14,6 @@ import org.springframework.shell.standard.ShellComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @ShellComponent
 public class LibraryServiceShellImpl implements LibraryServiceShell {

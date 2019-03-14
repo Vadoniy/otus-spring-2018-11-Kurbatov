@@ -1,6 +1,6 @@
 package homework_7;
 
-import homework_7.dao.AuthorRepository;
+import homework_7.repository.AuthorRepository;
 import homework_7.domain.Author;
 import org.junit.Test;
 import org.junit.runner.RunWith;
