@@ -1,8 +1,9 @@
 package homework_9.domain.customer;
 
+import homework_9.utils.Utils;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 
 @Entity
 @Table(name = "PERSONS")
@@ -12,15 +13,25 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
+    private int day;
+    private int month;
+    private int year;
     private LocalDate birthDate;
     private int age;
 
-//    public Person() {}
+    public Person() {}
+
+    public Person(String name) {
+        this.name = name;
+    }
 
     public Person(String name, int day, int month, int year) {
         this.name = name;
-        this.birthDate = LocalDate.of(year, month, day);
-        this.age = getAge();
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.birthDate = Utils.updateBirthday(day, month, year);
+        this.age = Utils.getAge(birthDate);
     }
 
     public String getName() {
@@ -31,24 +42,52 @@ public class Person {
         this.name = name;
     }
 
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(int day, int month, int year) {
-        this.birthDate = LocalDate.of(year, month, day);
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public int getAge() {
-        return Period.between(birthDate, LocalDate.now()).getYears();
+        return age;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                ", age=" + getAge() +
-                '}';
+    public void setAge(int age) {
+        this.age = age;
     }
+
+    //    @Override
+//    public String toString() {
+//        return "Person{" +
+//                "name='" + name + '\'' +
+//                ", birthDate=" + birthDate +
+//                ", age=" + getAge() +
+//                '}';
+//    }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Controller
 public class ClientController {
@@ -47,8 +48,10 @@ public class ClientController {
     public void createClient(HttpServletResponse response,
                                @ModelAttribute(value = "client") Client client,
                                @ModelAttribute(value = "person") Person person) throws IOException {
-        personRepository.save(person);
-        client.setPerson(person);
+        Person cachePerson = new Person(person.getName(), person.getDay(), person.getMonth(), person.getYear());
+        personRepository.save(cachePerson);
+//        How to inject person from above to client???
+        client.setPerson(cachePerson);
         client.setRegistryDate(LocalDate.now());
         clientRepository.save(client);
         response.sendRedirect("/clients");
