@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit client</title>
+</head>
+<body>
+<h2>Update client</h2>
+<label>(fill all fields please)</label>
+<div class="container">
+    <div class="row">
+        <form action="/client/update" method="put" th:object="${client}" th:method="put">
+            <div class="form-group" th:object=${person}>
+                <label for="name">Name:</label>
+                <input id="name" name="Name" type="text" size="40" class="form-control" th:value="*{name}" required/><br><br>
+                <label>Birthday:</label><br>
+                <label for="day-input">Day:</label>
+                <input id="day-input" name="day" type="number" size="3" class="form-control" th:value="*{day}" required/>
+                <label for="month-input">Month:</label>
+                <input id="month-input" name="month" type="number" size="3" class="form-control" th:value="*{month}" required/>
+                <label for="year-input">Year:</label>
+                <input id="year-input" name="year" type="number" size="5" class="form-control" th:value="*{year}" required/>
+            </div>
+            <div class="form-group" th:object=${client}>
+                <label for="address">Address:</label>
+                <input id="address" name="address" type="text"  size="56" class="form-control" th:value="*{address}" required/><br>
+                <label for="phone">Phone:</label>
+                <input id="phone" name="phone" type="text" size="15" class="form-control" th:value="*{phone}" required/>
+                <label for="email">Email:</label>
+                <input id="email" name="email" type="text" size="28" class="form-control" th:value="*{email}"/><br><br>
+                <label for="comment">Comment:</label>
+                <input id="comment" name="comment" type="text" size="55" class="form-control" th:value="*{comment}"/><br>
+                <label for="id">Id:</label>
+                <input id="id" name="id" type="text" size="1" readonly th:value="*{id}"/>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Update client</button>
+        </form>
+    </div>
+</div>
+<br>
+    <a th:href="welcomePage">Welcome page</a>
+</body>
+</html>

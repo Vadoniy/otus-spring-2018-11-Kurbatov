@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update ingredient</title>
+</head>
+<body>
+<h2>Update ingredient</h2>
+<label>(fill all fields please)</label>
+<div class="container">
+    <div class="row">
+        <form action="/ingredient/update" method="put" th:object="${ingredient}" th:method="put">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input id="name" name="Name" type="text" class="form-control" th:value="*{name}" required/>
+                <label for="description">Description:</label>
+                <input id="description" name="description" type="text" class="form-control" th:value="*{description}" required/>
+                <label for="quantity">Quantity:</label>
+                <input id="quantity" name="quantity" type="text" class="form-control"  th:value="*{quantity}" required/>
+                <label for="measure">Measure:</label>
+                <input id="measure" name="measure" type="text" class="form-control"  th:value="*{measure}" required/>
+                <label for="type">Type:</label>
+                <input id="type" name="type" type="text" class="form-control"  th:value="*{type}" required/>
+                <label for="id">Id:</label>
+                <input id="id" name="id" type="text" size="1" readonly th:value="*{id}"/>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Update ingredient</button>
+        </form>
+    </div>
+</div>
+<br>
+<a th:href="welcomePage">Welcome page</a>
+</body>
+</html>

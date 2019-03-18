@@ -82,6 +82,14 @@ public class Person {
         this.age = age;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
     //    @Override
 //    public String toString() {
 //        return "Person{" +

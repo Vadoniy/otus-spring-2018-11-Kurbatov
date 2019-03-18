@@ -25,23 +25,26 @@
             <tr th:each="client : ${clients}" th:object=${client}>
                 <td th:text="*{id}">1</td>
                 <td th:text="*{person.name}">John Doe</td>
-                <td th:text="*{address}">John Doe</td>
-                <td th:text="*{phone}">John Doe</td>
-                <td th:text="*{email}">John Doe</td>
-                <td th:text="*{ordersAmount}">John Doe</td>
-                <td th:text="*{registryDate}">John Doe</td>
-                <td th:text="*{comment}">John Doe</td>
+                <td th:text="*{address}">City, street...</td>
+                <td th:text="*{phone}">+79XX...</td>
+                <td th:text="*{email}">bezpizzy@jizni.net</td>
+                <td th:text="*{ordersAmount}">How many pizzas can he eat?</td>
+                <td th:text="*{registryDate}">30.10.2018</td>
+                <td th:text="*{comment}">Preferences</td>
                 <td>
                     <a th:href="clients">Create order</a>
                     <!--<a th:href="@{/edit(id=*{id})}">Edit</a>-->
                 </td>
                 <td>
-                    <a th:href="clients">Edit</a>
-                    <!--<a th:href="@{/edit(id=*{id})}">Edit</a>-->
+                    <a th:href="@{/client/update(id=*{id})}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/client/delete(id=*{id})}">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a th:href="createClient">New client</a>
+    <a th:href="createClient">New client</a><br>
+    <a th:href="welcomePage">Welcome page</a>
 </body>
 </html>

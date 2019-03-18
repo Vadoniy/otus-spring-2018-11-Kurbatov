@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Available ingredients</title>
+</head>
+<body>
+<h2>Available ingredients</h2>
+<p>
+    In this tab you can see available ingredients from your stock. Ingredients amount reduced after every order.<br>
+    You can update ingredients amount by pressing "Update" or remove ingredient if it leaves your recipe by pressing "Delete".<br>
+    You can also add new ingredient in the list by pressing "New ingredient".
+</p>
+<table class="ingredients">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Measure</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ingredient : ${ingredients}" th:object=${ingredient}>
+        <td th:text="*{id}">1</td>
+        <td th:text="*{name}">Tomatoes?..</td>
+        <td th:text="*{description}">What is it???</td>
+        <td th:text="*{quantity}">How many</td>
+        <td th:text="*{measure}">What measure of ingredient?</td>
+        <td th:text="*{type}">Filling or dough</td>
+        <td>
+            <!--<a th:href="clients">Update</a>-->
+            <a th:href="@{/ingredient/update(id=*{id})}">Update</a>
+        </td>
+        <td>
+            <a th:href="@{/ingredient/delete(id=*{id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="newIngredient">New ingredient</a><br>
+<a th:href="welcomePage">Welcome page</a>
+</body>
+</html>
