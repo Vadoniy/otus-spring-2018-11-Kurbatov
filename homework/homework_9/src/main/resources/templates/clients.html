@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create client</title>
+</head>
+<body>
+    <h2>Clients</h2>
+    <table class="clients">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Orders amount</th>
+                <th>Registry date</th>
+                <th>Comment</th>
+                <th>Create order</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="client : ${clients}" th:object=${client}>
+                <td th:text="*{id}">1</td>
+                <td th:text="*{person.name}">John Doe</td>
+                <td th:text="*{address}">City, street...</td>
+                <td th:text="*{phone}">+79XX...</td>
+                <td th:text="*{email}">bezpizzy@jizni.net</td>
+                <td th:text="*{ordersAmount}">How many pizzas can he eat?</td>
+                <td th:text="*{registryDate}">30.10.2018</td>
+                <td th:text="*{comment}">Preferences</td>
+                <td>
+                    <a th:href="clients">Create order</a>
+                    <!--<a th:href="@{/edit(id=*{id})}">Edit</a>-->
+                </td>
+                <td>
+                    <a th:href="@{/client/update(id=*{id})}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/client/delete(id=*{id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="createClient">New client</a><br>
+    <a th:href="welcomePage">Welcome page</a>
+</body>
+</html>

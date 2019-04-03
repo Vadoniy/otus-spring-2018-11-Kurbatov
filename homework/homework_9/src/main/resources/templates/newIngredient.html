@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New ingredient</title>
+</head>
+<body>
+    <h2>Create new ingredient</h2>
+    <label>(fill all fields please)</label>
+
+    <div class="container">
+        <div class="row">
+            <!--<form action="/books/add" method="post">-->
+            <form action="/ingredient/create" method="post">
+                <div class="form-group" th:object=${ingredient}>
+                    <label for="name">Name:</label>
+                    <input id="name" name="Name" type="text" class="form-control" placeholder="Something tasty" required/>
+                    <label for="description">Description:</label>
+                    <input id="description" name="description" type="text" class="form-control" placeholder="" required/>
+                    <label for="quantity">Quantity:</label>
+                    <input id="quantity" name="quantity" type="text" class="form-control" placeholder="Haw many/much" required/>
+                    <label for="measure">Measure:</label>
+                    <input id="measure" name="measure" type="text" class="form-control" required/>
+                    <label for="type">Type:</label>
+                    <input id="type" name="type" type="text" class="form-control" placeholder="Filling or dough" required/>
+                </div>
+                <button type="submit" class="btn btn-primary">Add new ingredient</button>
+            </form>
+        </div>
+    </div>
+
+    <a th:href="welcomePage">Welcome page</a>
+</body>
+</html>

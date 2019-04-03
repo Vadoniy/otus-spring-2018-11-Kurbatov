@@ -8,6 +8,7 @@ sourceCompatibility = 1.8
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE")
@@ -150,6 +151,58 @@ project('homework_7'){
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
         compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.1.RELEASE', ext: 'pom'
         compile group: 'org.springframework.shell', name: 'spring-shell-starter', version: '2.0.1.RELEASE'
+
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.1.RELEASE'
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
+    }
+}
+
+project('homework_8'){
+
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies{
+
+        compile("org.springframework.boot:spring-boot-starter")
+        compile("org.springframework.boot:spring-boot-starter-web")
+
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.1.3.RELEASE', ext: 'pom'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '2.1.3.RELEASE'
+        compile group: 'com.github.mongobee', name: 'mongobee', version: '0.13'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.1.RELEASE', ext: 'pom'
+        compile group: 'org.springframework.shell', name: 'spring-shell-starter', version: '2.0.1.RELEASE'
+
+        testCompile group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '2.2.0'
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.1.RELEASE'
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
+    }
+}
+
+project('homework_9'){
+
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies{
+
+        compile("org.springframework.boot:spring-boot-starter")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("com.h2database:h2")
+
+        compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.1.4.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.1.2.RELEASE'
+
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.1.3.RELEASE', ext: 'pom'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.1.RELEASE', ext: 'pom'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.3.RELEASE'
 
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
