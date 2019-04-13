@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit client</title>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+        var id = getId()[1];
+            $.get('/client?id='+id).done(function (client) {
+                $("#name").val(client.person.name);
+                $("#day-input").val(client.person.day);
+                $("#month-input").val(client.person.month);
+                $("#year-input").val(client.person.year);
+                $("#address").val(client.address);
+                $("#phone").val(client.phone);
+                $("#email").val(client.email);
+                $("#comment").val(client.comment);
+                $("#id").val(client.id);
+            })
+        });
+        function getId() {
+            return window.location.href.slice(window.location.href.indexOf('?')).split(/[&?]{1}[\w\d]+=/);
+        }
+    </script>
+</head>
+<body>
+<h2>Update client</h2>
+<label>(fill all fields please)</label>
+<div class="client">
+    <label for="name">Name:</label>
+    <input id="name" name="Name" type="text" size="40" class="client" required/><br><br>
+    <label>Birthday:</label><br>
+    <label for="day-input">Day:</label>
+    <input id="day-input" name="day" type="number" size="3" class="client" required/>
+    <label for="month-input">Month:</label>
+    <input id="month-input" name="month" type="number" size="3" class="client" required/>
+    <label for="year-input">Year:</label>
+    <input id="year-input" name="year" type="number" size="5" class="client" required/>
+    <label for="address">Address:</label>
+    <input id="address" name="address" type="text"  size="56" class="client" required/><br>
+    <label for="phone">Phone:</label>
+    <input id="phone" name="phone" type="text" size="15" class="client" required/>
+    <label for="email">Email:</label>
+    <input id="email" name="email" type="text" size="28" class="client"/><br><br>
+    <label for="comment">Comment:</label>
+    <input id="comment" name="comment" type="text" size="55" class="client"/><br>
+    <label for="id">Id:</label>
+    <input id="id" name="id" type="text" size="1" readonly/>
+    <br>
+    <button onclick="update()">Update</button>
+</div>
+<br>
+<a th:href="welcomePage">Welcome page</a>
+<script>
+    function update() {
+        var cacheClient = getClient();
+        var cachePerson = getPerson();
+        console.log(cacheClient.id);
+        console.log(cacheClient.address);
+        console.log(cacheClient.phone);
+        console.log(cacheClient.email);
+        console.log(cacheClient.comment);
+        $.ajax({
+            type: 'PUT',
+            url: '/client/update',
+            data: {client: cacheClient, person : cachePerson},
+            success: function(data) {
+            }
+        });
+    }
+
+    function getClient() {
+        var cacheClient = {id : $("#id").val(), address : $("#address").val(), phone : $("#phone").val(),
+        email : $("#email").val(), comment : $("#comment").val()};
+        return cacheClient;
+    }
+
+    function getPerson() {
+        var cachePerson = {name : $("#name").val(), day : $("#day").val(), month : $("#month").val(), year : $("#year").val()};
+        return cachePerson;
+    }
+</script>
+</body>
+</html>

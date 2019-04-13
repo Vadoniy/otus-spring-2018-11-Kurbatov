@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzas</title>
+</head>
+<body>
+<h2>Pizzas</h2>
+<table class="pizzas">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pizza : ${pizzas}" th:object=${pizza}>
+        <td th:text="*{id}">1</td>
+        <td th:text="*{name}">John Doe</td>
+        <td>
+            <a th:href="@{/recipe(id=*{id})}">Recipe</a>
+        </td>
+        <td>
+            <a th:href="@{/pizza/update(id=*{id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/pizza/delete(id=*{id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="createClient">New pizza</a><br>
+<a th:href="welcomePage">Welcome page</a>
+</body>
+</html>

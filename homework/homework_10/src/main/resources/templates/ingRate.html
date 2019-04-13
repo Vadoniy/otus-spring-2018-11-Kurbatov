@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rates of ingredients for pizza</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .pizzas, .pizzas td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h2>Rates of ingredients for pizza</h2>
+<p>
+    In this tab you can see available ingRates from your stock. Ingredients amount reduced after every order.<br>
+    You can update ingRates amount by pressing "Update" or remove ingredient if it leaves your recipe by pressing "Delete".<br>
+    You can also add new ingredient in the list by pressing "New ingredient".
+</p>
+<h3 th:text="${pizzaName}">1</h3>
+<table class="ingRates">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rate</th>
+        <th>Measure</th>
+        <!--<th>Type</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ingRate : ${ingRates}" th:object=${ingRate}>
+        <td th:text="*{id}">1</td>
+        <td th:text="*{ingredient.name}">Tomatoes?..</td>
+        <td th:text="*{rate}">How much?</td>
+        <td th:text="*{ingredient.measure}">How much?</td>
+        <!--<td>-->
+            <!--<a th:href="@{/ingredient/update(id=*{id})}">Update</a>-->
+        <!--</td>-->
+        <!--<td>-->
+            <!--<a th:href="@{/ingredient/delete(id=*{id})}">Delete</a>-->
+        <!--</td>-->
+    </tr>
+    </tbody>
+</table>
+<a th:href="newIngredient">New ingredient</a><br>
+<a th:href="welcomePage">Welcome page</a>
+</body>
+</html>

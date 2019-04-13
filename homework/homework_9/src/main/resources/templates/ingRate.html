@@ -11,32 +11,29 @@
     You can update ingRates amount by pressing "Update" or remove ingredient if it leaves your recipe by pressing "Delete".<br>
     You can also add new ingredient in the list by pressing "New ingredient".
 </p>
+<h3 th:text="${pizzaName}">1</h3>
 <table class="ingRates">
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Description</th>
-        <th>Quantity</th>
+        <th>Rate</th>
         <th>Measure</th>
-        <th>Type</th>
+        <!--<th>Type</th>-->
     </tr>
     </thead>
     <tbody>
-    <tr th:each="ingredient : ${ingredients}" th:object=${ingredient}>
+    <tr th:each="ingRate : ${ingRates}" th:object=${ingRate}>
         <td th:text="*{id}">1</td>
-        <td th:text="*{name}">Tomatoes?..</td>
-        <td th:text="*{description}">What is it???</td>
-        <td th:text="*{quantity}">How many</td>
-        <td th:text="*{measure}">What measure of ingredient?</td>
-        <td th:text="*{type}">Filling or dough</td>
-        <td>
-            <!--<a th:href="clients">Update</a>-->
-            <a th:href="@{/ingredient/update(id=*{id})}">Update</a>
-        </td>
-        <td>
-            <a th:href="@{/ingredient/delete(id=*{id})}">Delete</a>
-        </td>
+        <td th:text="*{ingredient.name}">Tomatoes?..</td>
+        <td th:text="*{rate}">How much?</td>
+        <td th:text="*{ingredient.measure}">How much?</td>
+        <!--<td>-->
+            <!--<a th:href="@{/ingredient/update(id=*{id})}">Update</a>-->
+        <!--</td>-->
+        <!--<td>-->
+            <!--<a th:href="@{/ingredient/delete(id=*{id})}">Delete</a>-->
+        <!--</td>-->
     </tr>
     </tbody>
 </table>

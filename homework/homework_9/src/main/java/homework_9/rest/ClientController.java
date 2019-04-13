@@ -28,16 +28,6 @@ public class ClientController {
         this.personRepository = personRepository;
     }
 
-    @GetMapping("/")
-    public void startPage(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/welcomePage");
-    }
-
-    @GetMapping("/welcomePage")
-    public String welcomePage() {
-        return "welcomePage";
-    }
-
     @GetMapping("/clients")
     public String pageClients(Model model){
         model.addAttribute("clients", clientRepository.findAll());
@@ -93,10 +83,5 @@ public class ClientController {
     public void deleteClient(HttpServletResponse response, @RequestParam long id) throws IOException {
         clientRepository.delete(clientRepository.findById(id).get());
         response.sendRedirect("/clients");
-    }
-
-    @GetMapping("/exit")
-    public void exit() {
-        System.exit(100500);
     }
 }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" th:content="${keywords}"/>
+    <title>List of pizzas</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .pizzas, .pizzas td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(function () {
+        $.get('/pizzas/list').done(function (pizzas) {
+            pizzas.forEach(function (pizza) {
+                $('tbody').append(`
+                    <tr>
+                        <td id="pizza_id">${pizza.id}</td>
+                        <td>${pizza.name}</td>
+                        <td>
+                            <button onclick="getRecipePage();">Recipe</button>
+                        </td>
+                        <td>
+                            <button onclick="editPizzaPage();">Edit</button>
+                        </td>
+                        <td>
+                            <button onclick="submit();">Delete</button>
+                        </td>
+                    </tr>
+                `)
+            });
+        })
+    });
+    </script>
+</head>
+<body>
+<h2>Pizzas</h2>
+    <table class="pizzas">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a th:href="newIngredient">New ingredient</a><br>
+    <a th:href="welcomePage">Welcome page</a>
+<script>
+    function submit() {
+        var pizza_id = $('#pizza_id').text();
+        console.log(pizza_id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/pizza/delete',
+            data: {pizza_id: pizza_id},
+            success: function(data) {
+                $('tbody').html('');
+                draw(data);
+            }
+        });
+    }
+
+    function draw(data) {
+        data.forEach(function (data) {
+            $('tbody').append(`
+                <tr>
+                    <td id="id">${data.id}</td>
+                    <td>${data.name}</td>
+                    <td>
+                        <button onclick="getRecipePage();">Recipe</button>
+                    </td>
+                    <td>
+                        <button onclick="editPizzaPage();">Edit</button>
+                    </td>
+                    <td>
+                        <button onclick="submit();">Delete</button>
+                    </td>
+                </tr>
+            `)
+        });
+    }
+
+    function editPizzaPage() {
+        var url = "/";
+        $(location).attr('href',url);
+    }
+
+    function getRecipePage() {
+        var url = "/";
+        $(location).attr('href',url);
+    }
+</script>
+</body>
+</html>

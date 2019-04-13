@@ -1,4 +1,4 @@
-package homework_7.dao;
+package homework_7.repository;
 
 import homework_7.domain.Book;
 import org.springframework.data.repository.CrudRepository;
