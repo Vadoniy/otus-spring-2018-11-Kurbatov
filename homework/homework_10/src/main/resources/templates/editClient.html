@@ -56,28 +56,32 @@
     function update() {
         var cacheClient = getClient();
         var cachePerson = getPerson();
+
         console.log(cacheClient.id);
+        console.log(cacheClient.name);
         console.log(cacheClient.address);
         console.log(cacheClient.phone);
         console.log(cacheClient.email);
         console.log(cacheClient.comment);
-        $.ajax({
-            type: 'PUT',
-            url: '/client/update',
-            data: {client: cacheClient, person : cachePerson},
+
+        $.ajax('/client/update', {
+            method: 'PUT',
+            data: JSON.stringify({client: cacheClient, person : cachePerson}),
+            contentType: 'application/json',
+            dataType: 'json',
             success: function(data) {
             }
         });
     }
 
     function getClient() {
-        var cacheClient = {id : $("#id").val(), address : $("#address").val(), phone : $("#phone").val(),
-        email : $("#email").val(), comment : $("#comment").val()};
+        var cacheClient = {id : $("#id").val(), address : $("#address").val(),
+        phone : $("#phone").val(), email : $("#email").val(), comment : $("#comment").val()};
         return cacheClient;
     }
 
     function getPerson() {
-        var cachePerson = {name : $("#name").val(), day : $("#day").val(), month : $("#month").val(), year : $("#year").val()};
+        var cachePerson = {name : $("#name").val(), day : $("#day-input").val(), month : $("#month-input").val(), year : $("#year-input").val()};
         return cachePerson;
     }
 </script>

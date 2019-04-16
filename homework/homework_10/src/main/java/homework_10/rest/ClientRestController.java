@@ -6,6 +6,7 @@ import homework_10.repository.ClientRepository;
 import homework_10.repository.IngredientRepository;
 import homework_10.repository.PersonRepository;
 import homework_10.rest.dto.ClientDto;
+import homework_10.rest.dto.FullClientDto;
 import homework_10.rest.dto.PersonDto;
 import homework_10.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,24 +50,24 @@ public class ClientRestController {
                 .collect(Collectors.toList());
     }
 
+//    @PutMapping(value = "/client/update", consumes = "application/json")
+//    public String updateClient(@RequestBody FullClientDto client) {
     @PutMapping(value = "/client/update", consumes = "application/json")
-    public void updateClient(@RequestBody ClientDto client,
-                             @RequestBody PersonDto person, BindingResult bindingResult) throws IOException {
-        if (bindingResult.hasErrors()) {
-            throw new IOException();
-        }
-        Client cacheClient = clientRepository.findById(client.getId()).get();
+    public void updateClient(@RequestBody FullClientDto fullClientDto) {
+        ClientDto clientDto = fullClientDto.getClientDto();
+        PersonDto personDto = fullClientDto.getPersonDto();
+        Client cacheClient = clientRepository.findById(clientDto.getId()).get();
         Person cachePerson = personRepository.findById(cacheClient.getPerson().getId()).get();
-        cachePerson.setName(person.getName());
-        cachePerson.setDay(person.getDay());
-        cachePerson.setMonth(person.getMonth());
-        cachePerson.setYear(person.getYear());
-        cachePerson.setBirthDate(Utils.updateBirthday(person.getDay(), person.getMonth(), person.getYear()));
+        cachePerson.setName(personDto.getName());
+        cachePerson.setDay(personDto.getDay());
+        cachePerson.setMonth(personDto.getMonth());
+        cachePerson.setYear(personDto.getYear());
+        cachePerson.setBirthDate(Utils.updateBirthday(personDto.getDay(), personDto.getMonth(), personDto.getYear()));
         personRepository.save(cachePerson);
-        cacheClient.setAddress(client.getAddress());
-        cacheClient.setAddress(client.getEmail());
-        cacheClient.setAddress(client.getPhone());
-        cacheClient.setAddress(client.getComment());
+        cacheClient.setAddress(clientDto.getAddress());
+        cacheClient.setAddress(clientDto.getEmail());
+        cacheClient.setAddress(clientDto.getPhone());
+        cacheClient.setAddress(clientDto.getComment());
         clientRepository.save(cacheClient);
     }
 }
