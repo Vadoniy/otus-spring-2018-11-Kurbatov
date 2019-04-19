@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface IngRateRepository extends CrudRepository<IngRate, Long> {
     List<IngRate> findByPizzaId(long pizzaId);
+    List<IngRate> findByIngredientId(long ingredientId);
 }

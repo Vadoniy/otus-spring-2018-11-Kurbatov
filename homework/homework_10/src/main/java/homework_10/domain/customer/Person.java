@@ -99,13 +99,4 @@ public class Person {
     public long getId() {
         return id;
     }
-
-    //    @Override
-//    public String toString() {
-//        return "Person{" +
-//                "name='" + name + '\'' +
-//                ", birthDate=" + birthDate +
-//                ", age=" + getAge() +
-//                '}';
-//    }
 }

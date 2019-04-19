@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,10 +51,8 @@ public class ClientRestController {
                 .collect(Collectors.toList());
     }
 
-//    @PutMapping(value = "/client/update", consumes = "application/json")
-//    public String updateClient(@RequestBody FullClientDto client) {
     @PutMapping(value = "/client/update", consumes = "application/json")
-    public void updateClient(@RequestBody FullClientDto fullClientDto) {
+    public String updateClient(@RequestBody FullClientDto fullClientDto) {
         ClientDto clientDto = fullClientDto.getClientDto();
         PersonDto personDto = fullClientDto.getPersonDto();
         Client cacheClient = clientRepository.findById(clientDto.getId()).get();
@@ -65,9 +64,31 @@ public class ClientRestController {
         cachePerson.setBirthDate(Utils.updateBirthday(personDto.getDay(), personDto.getMonth(), personDto.getYear()));
         personRepository.save(cachePerson);
         cacheClient.setAddress(clientDto.getAddress());
-        cacheClient.setAddress(clientDto.getEmail());
-        cacheClient.setAddress(clientDto.getPhone());
-        cacheClient.setAddress(clientDto.getComment());
+        cacheClient.setEmail(clientDto.getEmail());
+        cacheClient.setPhone(clientDto.getPhone());
+        cacheClient.setComment(clientDto.getComment());
         clientRepository.save(cacheClient);
+        return "{}";
+    }
+
+    @PostMapping(value = "/client/create", consumes = "application/json")
+    public String createClient(@RequestBody FullClientDto fullClientDto) {
+        ClientDto clientDto = fullClientDto.getClientDto();
+        PersonDto personDto = fullClientDto.getPersonDto();
+        Person cachePerson = new Person(personDto.getName(), personDto.getDay(), personDto.getMonth(), personDto.getYear());
+        cachePerson.setName(personDto.getName());
+        cachePerson.setYear(personDto.getDay());
+        cachePerson.setMonth(personDto.getMonth());
+        cachePerson.setYear(personDto.getYear());
+        personRepository.save(cachePerson);
+        Client client = new Client();
+        client.setPerson(cachePerson);
+        client.setAddress(clientDto.getAddress());
+        client.setPhone(clientDto.getPhone());
+        client.setEmail(clientDto.getEmail());
+        client.setComment(clientDto.getComment());
+        client.setRegistryDate(LocalDate.now());
+        clientRepository.save(client);
+        return "{}";
     }
 }

@@ -46,23 +46,8 @@ public class ClientPagesController {
         return "editClient";
     }
 
-//    @PutMapping("/client/update")
-    public void updateClient(@ModelAttribute(value = "client") Client client,
-                             @ModelAttribute(value = "person") Person person,
-                             HttpServletResponse response) throws IOException {
-        Client cacheClient = clientRepository.findById(client.getId()).get();
-        Person cachePerson = personRepository.findById(cacheClient.getPerson().getId()).get();
-        cachePerson.setName(person.getName());
-        cachePerson.setDay(person.getDay());
-        cachePerson.setMonth(person.getMonth());
-        cachePerson.setYear(person.getYear());
-        cachePerson.setBirthDate(Utils.updateBirthday(person.getDay(), person.getMonth(), person.getYear()));
-        personRepository.save(cachePerson);
-        cacheClient.setAddress(client.getAddress());
-        cacheClient.setAddress(client.getEmail());
-        cacheClient.setAddress(client.getPhone());
-        cacheClient.setAddress(client.getComment());
-        clientRepository.save(cacheClient);
-        response.sendRedirect("/clients");
+    @GetMapping("/createClient")
+    public String getCreateClientPage(Model model) {
+        return "createClient";
     }
 }

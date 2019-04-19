@@ -27,6 +27,25 @@ public class Client {
 
     public Client() {}
 
+    public Client(Person person, String address, String phone, String email, String comment) {
+        this.person = person;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.comment = comment;
+    }
+
+    public Client(long id, Person person, String address, String phone, String email, int ordersAmount, LocalDate registryDate, String comment) {
+        this.id = id;
+        this.person = person;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.ordersAmount = ordersAmount;
+        this.registryDate = registryDate;
+        this.comment = comment;
+    }
+
     public long getId() {
         return id;
     }

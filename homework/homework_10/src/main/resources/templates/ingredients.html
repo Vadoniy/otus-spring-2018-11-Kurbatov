@@ -28,7 +28,7 @@
                         <td>${ingredient.measure}</td>
                         <td>${ingredient.type}</td>
                         <td>
-                            <button onclick="updateIngredient();">Update</button>
+                            <button onclick="updateIngredient('${ingredient.id}');">Update</button>
                         </td>
                         <td>
                             <button onclick="submit('${ingredient.id}');">Delete</button>
@@ -65,7 +65,7 @@
 </table>
 <br>
 <br>
-<a th:href="newIngredient">New ingredient</a><br>
+<a th:href="createIngredient">New ingredient</a><br>
 <a th:href="welcomePage">Welcome page</a>
 <script>
 function submit(ingredient) {
@@ -79,6 +79,9 @@ function submit(ingredient) {
             success: function(data) {
                 $('tbody').html('');
                 draw(data);
+            },
+            error: function(thrownError){
+                alert(thrownError.message);
             }
         });
     }
@@ -103,6 +106,11 @@ function submit(ingredient) {
                     </tr>
                 `)
         });
+    }
+
+    function updateIngredient(ingredient) {
+        var url = "/updateIngredient?id=" + ingredient;
+        $(location).attr('href',url);
     }
 </script>
 </body>

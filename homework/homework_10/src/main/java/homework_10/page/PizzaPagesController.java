@@ -1,9 +1,11 @@
 package homework_10.page;
 
 import homework_10.domain.manufacture.IngRate;
+import homework_10.domain.manufacture.Pizza;
 import homework_10.repository.IngRateRepository;
 import homework_10.repository.IngredientRepository;
 import homework_10.repository.PizzaRepository;
+import homework_10.rest.dto.PizzaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +35,12 @@ public class PizzaPagesController {
     }
 
     @GetMapping("/recipe")
-    public String getIngredientsByPizzaId(@RequestParam long id, Model model) {
-        List<IngRate> ingRates = ingRateRepository.findByPizzaId(id);
-        String pizzaName = ingRates.size()>0 ? ingRates.get(0).getPizza().getName() : "";
-        model.addAttribute("ingRates", ingRates);
-        model.addAttribute("pizzaName", pizzaName);
-        return "ingRate";
+    public String getRecipePage(@RequestParam long id, Model model) {
+        Pizza cachePizza = pizzaRepository.findById(id).get();
+        String name = cachePizza.getName();
+        model.addAttribute("keywords", "Recipe of " + name);
+        model.addAttribute("pizzaName", name);
+        model.addAttribute("id", id);
+        return "recipe";
     }
 }

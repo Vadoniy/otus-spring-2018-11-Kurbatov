@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" th:content="${keywords}"/>
+    <title>Pizza recipe</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .recipe, .recipe td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var id = getId()[1];
+            $.get('/pizza/recipe?id='+id).done(function (ingRates) {
+                ingRates.forEach(function (ingRate) {
+                    $('tbody').append
+                    (`
+                        <tr>
+                            <td id="ingRateId">${ingRate.id}</td>
+                            <td>${ingRate.ingredient.name}</td>
+                            <td>${ingRate.rate}</td>
+                            <td>${ingRate.ingredient.measure}</td>
+                        </tr>
+                    `)
+                });
+            })
+        });
+        function getId() {
+            return window.location.href.slice(window.location.href.indexOf('?')).split(/[&?]{1}[\w\d]+=/);
+        }
+    </script>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2 th:text="${pizzaName}"></h2>
+    <table class="recipe">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Measure</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button onclick="setEditable();">Edit</button>
+    <a href="welcomePage">Welcome page</a>
+</body>
+<script>
+    function setEditable() {
+        $('tbody').attr("contenteditable", true);
+    }
+
+    function editRecipe() {
+        var url = "/";
+        $(location).attr('href',url);
+    }
+</script>
+</html>
