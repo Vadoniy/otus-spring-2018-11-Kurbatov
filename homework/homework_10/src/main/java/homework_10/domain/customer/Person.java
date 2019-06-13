@@ -1,6 +1,6 @@
-package homework_9.domain.customer;
+package homework_10.domain.customer;
 
-import homework_9.utils.Utils;
+import homework_10.utils.Utils;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,6 +32,16 @@ public class Person {
         this.year = year;
         this.birthDate = Utils.updateBirthday(day, month, year);
         this.age = Utils.getAge(birthDate);
+    }
+
+    public Person(long id, String name, int day, int month, int year, LocalDate birthDate, int age) {
+        this.id = id;
+        this.name = name;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.birthDate = birthDate;
+        this.age = age;
     }
 
     public String getName() {

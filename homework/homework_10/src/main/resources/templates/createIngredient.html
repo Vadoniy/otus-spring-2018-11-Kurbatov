@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new ingredient</title>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>Update ingredient</h2>
+<label>(fill all fields please)</label>
+<div class="ingredient">
+    <label for="name">Name:</label>
+    <input id="name" name="Name" type="text" size="40" class="client" required/><br><br>
+    <label for="description">Description:</label>
+    <input id="description" name="description" type="text" size="160" class="client" required/>
+    <label for="quantity">Quantity:</label>
+    <input id="quantity" name="quantity" type="number" size="10" class="client" required/>
+    <label for="measure">Measure:</label>
+    <input id="measure" name="measure" type="text" size="24" class="client" required/>
+    <label for="type">Type:</label>
+    <input id="type" name="type" type="text" size="24" class="client" required/><br>
+    <br>
+    <button onclick="submit()">Complete</button>
+</div>
+<br>
+<a th:href="welcomePage">Welcome page</a>
+<script>
+    function submit() {
+        var cacheIngredient = getIngredient();
+
+        $.ajax('/ingredient/add', {
+            method: 'POST',
+            data: JSON.stringify({ingredientDto: cacheIngredient}),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(data) {
+                var url = "/ingredients";
+                $(location).attr('href',url);
+            }
+        });
+    }
+
+    function getIngredient() {
+        var cacheIngredient = {name : $("#name").val(),
+        description : $("#description").val(), quantity : $("#quantity").val(), measure : $("#measure").val(),
+        type : $("#type").val()};
+        return cacheIngredient;
+    }
+</script>
+</body>
+</html>

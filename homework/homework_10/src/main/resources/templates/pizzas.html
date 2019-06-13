@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="keywords" th:content="${keywords}"/>
+    <title>List of pizzas</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .pizzas, .pizzas td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(function () {
+        $.get('/pizzas/list').done(function (pizzas) {
+            pizzas.forEach(function (pizza) {
+                $('tbody').append(`
+                    <tr>
+                        <td>${pizza.id}</td>
+                        <td>${pizza.name}</td>
+                        <td>
+                            <button onclick="getRecipePage('${pizza.id}');">Recipe</button>
+                        </td>
+                        <td>
+                            <button onclick="del('${pizza.id}');">Delete</button>
+                        </td>
+                    </tr>
+                `)
+            });
+        })
+    });
+    </script>
+</head>
+<body>
+<h2>Pizzas</h2>
+    <table class="pizzas">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <a th:href="newIngredient">New pizza</a><br>
+    <a th:href="welcomePage">Welcome page</a>
+<script>
+    function del(pizza) {
+        var pizza_id = pizza;
+        console.log(pizza_id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/pizza/delete',
+            data: {pizza_id: pizza_id},
+            success: function(data) {
+                $('tbody').html('');
+                draw(data);
+            }
+        });
+    }
+
+    function draw(data) {
+        data.forEach(function (data) {
+            $('tbody').append(`
+                <tr>
+                    <td>${data.id}</td>
+                    <td>${data.name}</td>
+                    <td>
+                        <button onclick="getRecipePage('${data.id}');">Recipe</button>
+                    </td>
+                    <td>
+                        <button onclick="editPizzaPage();">Edit</button>
+                    </td>
+                    <td>
+                        <button onclick="del('${data.id}');">Delete</button>
+                    </td>
+                </tr>
+            `)
+        });
+    }
+
+    function getRecipePage(id) {
+        var url = "/recipe?id=" + id;
+        $(location).attr('href',url);
+    }
+</script>
+</body>
+</html>

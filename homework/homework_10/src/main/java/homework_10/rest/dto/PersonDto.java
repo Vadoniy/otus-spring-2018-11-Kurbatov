@@ -1,16 +1,11 @@
-package homework_9.domain.customer;
+package homework_10.rest.dto;
 
-import homework_9.utils.Utils;
+import homework_10.domain.customer.Person;
+import homework_10.utils.Utils;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "PERSONS")
-public class Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+public class PersonDto {
     private long id;
     private String name;
     private int day;
@@ -19,19 +14,25 @@ public class Person {
     private LocalDate birthDate;
     private int age;
 
-    public Person() {}
+    public PersonDto() {}
 
-    public Person(String name) {
-        this.name = name;
-    }
-
-    public Person(String name, int day, int month, int year) {
+    public PersonDto(String name, int day, int month, int year) {
         this.name = name;
         this.day = day;
         this.month = month;
         this.year = year;
         this.birthDate = Utils.updateBirthday(day, month, year);
         this.age = Utils.getAge(birthDate);
+    }
+
+    public PersonDto(long id, String name, int day, int month, int year, LocalDate birthDate, int age) {
+        this.id = id;
+        this.name = name;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.birthDate = birthDate;
+        this.age = age;
     }
 
     public String getName() {
@@ -88,5 +89,15 @@ public class Person {
 
     public long getId() {
         return id;
+    }
+
+    public static PersonDto toDto(Person person) {
+        return new PersonDto(person.getId()
+                , person.getName()
+                , person.getDay()
+                , person.getMonth()
+                , person.getYear()
+                , person.getBirthDate()
+                , person.getAge());
     }
 }

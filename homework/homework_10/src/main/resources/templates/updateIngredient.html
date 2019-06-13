@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update ingredient</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .ingredient, .ingredient td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+        var id = getId()[1];
+            $.get('/ingredient?id='+id).done(function (ingredient) {
+                $("#name").val(ingredient.name);
+                $("#description").val(ingredient.description);
+                $("#quantity").val(ingredient.quantity);
+                $("#measure").val(ingredient.measure);
+                $("#type").val(ingredient.type);
+                $("#id").val(ingredient.id);
+            })
+        });
+        function getId() {
+            return window.location.href.slice(window.location.href.indexOf('?')).split(/[&?]{1}[\w\d]+=/);
+        }
+    </script>
+</head>
+<body>
+    <h2>Update ingredient</h2>
+    <label>(fill all fields please)</label>
+    <div class="ingredient">
+        <label for="name">Name:</label>
+        <input id="name" name="Name" type="text" size="40" class="client" required/><br><br>
+        <label for="description">Description:</label>
+        <input id="description" name="description" type="text" size="160" class="client" required/>
+        <label for="quantity">Quantity:</label>
+        <input id="quantity" name="quantity" type="number" size="10" class="client" required/>
+        <label for="measure">Measure:</label>
+        <input id="measure" name="measure" type="text" size="24" class="client" required/>
+        <label for="type">Type:</label>
+        <input id="type" name="type" type="text" size="24" class="client" required/><br>
+        <label for="id">Id:</label>
+        <input id="id" name="id" type="text" size="1" readonly/>
+        <br>
+        <button onclick="update()">Update</button>
+    </div>
+    <br>
+    <a th:href="welcomePage">Welcome page</a>
+    <script>
+        function update() {
+            var cacheIngredient = getIngredient();
+
+            $.ajax('/ingredient/update', {
+                method: 'PUT',
+                data: JSON.stringify({ingredientSuperDto: cacheIngredient}),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function(data) {
+                    var url = "/ingredients";
+                    $(location).attr('href',url);
+                }
+            });
+        }
+
+        function getIngredient() {
+            var cacheIngredient = {id : $("#id").val(), name : $("#name").val(),
+            description : $("#description").val(), quantity : $("#quantity").val(), measure : $("#measure").val(),
+            type : $("#type").val()};
+            return cacheIngredient;
+        }
+
+        function submit(ingredient) {
+        var ingredient_id = ingredient;
+        $.ajax({
+            type: 'DELETE',
+            url: '/ingredient/delete',
+            data: {ingredient_id: ingredient_id},
+            success: function(data) {
+                $('tbody').html('');
+                draw(data);
+            },
+            error: function(thrownError){
+                alert(thrownError.message);
+            }
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" th:content="${keywords}"/>
+    <title>Ingredients on the stock</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .ingredients, .ingredients td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(function () {
+        $.get('/ingredient/list').done(function (ingredients) {
+            ingredients.forEach(function (ingredient) {
+                $('tbody').append(`
+                    <tr>
+                        <td>${ingredient.id}</td>
+                        <td>${ingredient.name}</td>
+                        <td>${ingredient.description}</td>
+                        <td>${ingredient.quantity}</td>
+                        <td>${ingredient.measure}</td>
+                        <td>${ingredient.type}</td>
+                        <td>
+                            <button onclick="updateIngredient('${ingredient.id}');">Update</button>
+                        </td>
+                        <td>
+                            <button onclick="submit('${ingredient.id}');">Delete</button>
+                        </td>
+                    </tr>
+                `)
+            });
+        })
+    });
+    </script>
+</head>
+<body>
+<h2>Ingredients on the stock</h2>
+<p>
+    In this tab you can see available ingredients from your stock. Ingredients amount reduced after every order.<br>
+    You can update ingredient amount by pressing "Update" or remove ingredient if it leaves your recipe by pressing "Delete".<br>
+    You can also add new ingredient in the list by pressing "New ingredient".
+</p>
+<table class="ingredients">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Measure</th>
+        <th>Type</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<br>
+<br>
+<a th:href="createIngredient">New ingredient</a><br>
+<a th:href="welcomePage">Welcome page</a>
+<script>
+function submit(ingredient) {
+        var ingredient_id = ingredient;
+
+        console.log(ingredient_id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/ingredient/delete',
+            data: {ingredient_id: ingredient_id},
+            success: function(data) {
+                $('tbody').html('');
+                draw(data);
+            },
+            error: function(thrownError){
+                alert(thrownError.message);
+            }
+        });
+    }
+
+    function draw(data) {
+        console.log(data.id);
+        data.forEach(function (data) {
+            $('tbody').append(`
+                    <tr>
+                        <td>${data.id}</td>
+                        <td>${data.name}</td>
+                        <td>${data.description}</td>
+                        <td>${data.quantity}</td>
+                        <td>${data.measure}</td>
+                        <td>${data.type}</td>
+                        <td>
+                            <button onclick="updateIngredient();">Update</button>
+                        </td>
+                        <td>
+                            <button onclick="submit('${data.id}');">Delete</button>
+                        </td>
+                    </tr>
+                `)
+        });
+    }
+
+    function updateIngredient(ingredient) {
+        var url = "/updateIngredient?id=" + ingredient;
+        $(location).attr('href',url);
+    }
+</script>
+</body>
+</html>
